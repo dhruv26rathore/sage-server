@@ -29,13 +29,22 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(cookieParser())
 
-app.use(cors())
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE','OPTIONS')
-    next()
-})
+const corsOpts = {
+    origin: '*',
+    methods: ['GET, POST, PATCH, DELETE','OPTIONS'],
+    allowedHeaders: [
+      'Content-Type',
+    ],
+  };
+  
+  app.use(cors(corsOpts));
+// app.use(cors())
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*')
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE','OPTIONS')
+//     next()
+// })
 
 // app.use(function (req, res, next) {
 //     res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
