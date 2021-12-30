@@ -28,21 +28,22 @@ let io = socket(server);
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(cookieParser())
-app.use(cors())
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*')
-//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE')
-//     next()
-// })
 
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-    next();
-});
+app.use(cors())
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE','OPTIONS')
+    next()
+})
+
+// app.use(function (req, res, next) {
+//     res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
+//     res.header("Access-Control-Allow-Credentials", true);
+//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+//     res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+//     next();
+// });
 const adminRoutes = require('./routes/adminRoutes')
 const facultyRoutes = require('./routes/facultyRoutes')
 const studentRoutes = require('./routes/studentRoutes')
